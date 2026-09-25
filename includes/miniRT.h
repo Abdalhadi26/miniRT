@@ -13,6 +13,7 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 # include "../minilibx-linux/mlx.h"
+# include "../libft/libft.h"
 # include <math.h>
 
 # define WIDTH 800
@@ -98,9 +99,9 @@ typedef union u_shape
 
 typedef struct s_shapes_list
 {
-	t_shape_type	type;
-	t_shape			shape;
-	t_shapes_list	*next;
+	t_shape_type			type;
+	t_shape					shape;
+	struct t_shapes_list	*next;
 }					t_shapes_list;
 
 typedef struct s_img
@@ -122,5 +123,14 @@ typedef struct s_scene
 	t_light			light;
 	t_shapes_list	*shapes_list;
 }		t_scene;
+
+int	init_mlx(t_scene *scene);
+int	init_img(t_scene *scene);
+
+void	init_hook(t_scene *scene);
+
+
+void	cleanup(t_scene *scene);
+void	cleanup_and_exit(t_scene *scene, int code);
 
 #endif

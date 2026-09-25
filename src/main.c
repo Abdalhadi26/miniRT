@@ -16,6 +16,8 @@ int	main(int ac, char *av[])
 {
 	t_scene	*scene;
 
+	(void)av;
+	scene = NULL;
 	if (ac != 2)
 	{
 		ft_putstr_fd("Usage: ./miniRT <scene.rt>\n", 1);
