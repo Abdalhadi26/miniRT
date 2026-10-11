@@ -32,6 +32,13 @@ void	render(t_scene *scene)
 		while (x < WIDTH)
 		{
 			//ray tracing logic
+			//create the ray; we calculate the ray values according to the pixel and the fov
+			//find the closest hit; loop through all the object then find the closest
+			//if (no hit then background black) else continue
+			//if hit 
+			//calculate the surface normal filp it if it is not facing the camera
+			//calculate the color; if light calcuate with ambient and diffusion
+			//write the color to the image and move on 
 			x++;
 		}
 		y++;

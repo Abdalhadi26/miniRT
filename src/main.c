@@ -30,7 +30,7 @@ int	main(int ac, char *av[])
 	//---------------------------------------------
 	if (!init_mlx(scene))
 		return (1);
-	//render(scene);
+	render(scene);
 	init_hook(scene);
 	mlx_loop(scene->mlx);
 	return (0);

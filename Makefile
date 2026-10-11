@@ -19,6 +19,7 @@ SRC = \
 	src/mlx_init.c \
 	src/render.c \
 	src/utils.c \
+	src/math_func.c \
 
 OBJ = $(SRC:.c=.o)
 
