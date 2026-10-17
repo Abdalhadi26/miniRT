@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aayasrah <aayasrah@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: ahhammad <ahhammad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 17:58:57 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/06/29 17:58:57 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/17 15:33:16 by ahhammad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	init_img(t_scene *scene);
 
 void	init_hook(t_scene *scene);
 
-
+int		check_args(int ac, char *av[]);
 void	cleanup(t_scene *scene);
 void	cleanup_and_exit(t_scene *scene, int code);
 
