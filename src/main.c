@@ -6,7 +6,7 @@
 /*   By: ahhammad <ahhammad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 20:23:58 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/17 16:13:21 by ahhammad         ###   ########.fr       */
+/*   Updated: 2026/10/18 14:36:37 by ahhammad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char *av[])
 	
 	fd = open(".rt", O_RDONLY);
 	data = malloc(10);
-	i = read(fd,data, 10); //There are two choices: I can use read() to read the entire file and then split it, or I can use GNL and store the return values in a double pointer. to double pointer 
+	i = read(fd,data, 10); //There are two choices: I can use read() to read the entire file and then split it, or I can use GNL and store the return values in a double pointer.
 	if (i < 1) // exit
 		printf("hello\n");
 	data[i]= '\0';
