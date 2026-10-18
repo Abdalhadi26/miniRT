@@ -3,25 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahhammad <ahhammad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 20:23:58 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/05 15:51:20 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/17 16:13:21 by ahhammad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+     #include <sys/types.h>
+       #include <sys/stat.h>
+       #include <fcntl.h>
 
 int	main(int ac, char *av[])
 {
 	t_scene	*scene;
-
-	(void)av;
-	if (ac != 2)
-	{
-		ft_putstr_fd("Usage: ./miniRT <scene.rt>\n", 1);
+	int fd;
+	char *data;
+	int i;
+	
+	fd = open(".rt", O_RDONLY);
+	data = malloc(10);
+	i = read(fd,data, 10); //There are two choices: I can use read() to read the entire file and then split it, or I can use GNL and store the return values in a double pointer. to double pointer 
+	if (i < 1) // exit
+		printf("hello\n");
+	data[i]= '\0';
+	printf("hi i%c %d\n", data[i - 1], i);
+	if (!check_args(ac, av))
 		return (0);
-	}
 	//parse
 	//------------temp code------------------------
 		scene = ft_calloc(1, sizeof(t_scene));
@@ -33,5 +42,6 @@ int	main(int ac, char *av[])
 	render(scene);
 	init_hook(scene);
 	mlx_loop(scene->mlx);
+	
 	return (0);
 }

@@ -14,6 +14,7 @@ INCLUDES = -I includes -I $(LIBFT_DIR) -I $(MINILIBX_DIR)
 
 SRC = \
 	src/main.c \
+	src/parsing/check_args.c \
 	src/cleanup.c \
 	src/hook_init.c \
 	src/mlx_init.c \
