@@ -15,10 +15,12 @@
 # include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 # include <math.h>
+# include <limits.h>
 
 # define WIDTH 800
 # define HEIGHT 600
 # define ESC 65307
+# define EPS 0.000001
 
 typedef enum s_shape_type
 {
@@ -36,14 +38,14 @@ typedef struct s_color
 
 typedef struct s_vector
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 }			t_vector;
 
 typedef struct s_ambient_light
 {
-	float	intensity;
+	double	intensity;
 	t_color	color;
 }			t_ambient_light;
 
@@ -57,7 +59,7 @@ typedef struct s_camera
 typedef struct s_light
 {
 	t_vector	light_point;
-	float		brightness;
+	double		brightness;
 	t_color		color;
 }				t_light;
 
@@ -70,7 +72,7 @@ typedef struct s_ray
 typedef struct s_sphere
 {
 	t_vector		center;
-	float			diameter;
+	double			diameter;
 	t_color			color;
 }					t_sphere;
 
@@ -85,16 +87,16 @@ typedef struct s_cylinder
 {
 	t_vector		center;
 	t_vector		facing_vector;
-	float			diameter;
-	float			height;
+	double			diameter;
+	double			height;
 	t_color			color;
 }					t_cylinder;
 
 typedef union u_shape
 {
-	t_sphere	sphere;
-	t_plane		plane;
-	t_cylinder	cylinder;
+	t_sphere		sphere;
+	t_plane			plane;
+	t_cylinder		cylinder;
 }				t_shape;
 
 typedef struct s_shapes_list
@@ -135,4 +137,10 @@ void	cleanup_and_exit(t_scene *scene, int code);
 
 void	ft_put_pixel(t_img *img, int x, int y, int color);
 void	render(t_scene *scene);
+
+double	ft_dot(t_vector v1, t_vector v2);
+t_vector ft_cross(t_vector v1, t_vector v2);
+t_vector ft_scale_vector(t_vector v, double scale);
+t_vector vecotrs_sum(t_vector forward, t_vector right, t_vector up);
+t_vector normalize(t_vector vec);
 #endif
