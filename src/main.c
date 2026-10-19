@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include "miniRT.h"
-     #include <sys/types.h>
-       #include <sys/stat.h>
-       #include <fcntl.h>
+
 
 int	main(int ac, char *av[])
 {
@@ -22,21 +20,17 @@ int	main(int ac, char *av[])
 	char *data;
 	int i;
 	
-	fd = open(".rt", O_RDONLY);
-	data = malloc(10);
-	i = read(fd,data, 10); //There are two choices: I can use read() to read the entire file and then split it, or I can use GNL and store the return values in a double pointer.
-	if (i < 1) // exit
-		printf("hello\n");
-	data[i]= '\0';
-	printf("hi i%c %d\n", data[i - 1], i);
+	
+	
 	if (!check_args(ac, av))
 		return (0);
-	//parse
 	//------------temp code------------------------
 		scene = ft_calloc(1, sizeof(t_scene));
 		if (!scene)
 			return (0);
 	//---------------------------------------------
+	//parse
+	//set_scene(scene);// here i will call the function that will parse the scene file and set the scene struct
 	if (!init_mlx(scene))
 		return (1);
 	render(scene);

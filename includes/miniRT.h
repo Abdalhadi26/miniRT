@@ -14,8 +14,12 @@
 # define MINIRT_H
 # include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
+# include "../gnl/get_next_line.h"
 # include <math.h>
 # include <limits.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 # define WIDTH 800
 # define HEIGHT 600

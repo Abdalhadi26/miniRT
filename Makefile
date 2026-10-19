@@ -4,7 +4,9 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 LIBFT_DIR = ./libft
+GNL_DIR = ./gnl
 LIBFT = $(LIBFT_DIR)/libft.a
+GNL = $(GNL_DIR)/libgnl.a
 
 MINILIBX_DIR = ./minilibx-linux
 MLX = $(MINILIBX_DIR)/libmlx.a
@@ -24,27 +26,33 @@ SRC = \
 
 OBJ = $(SRC:.c=.o)
 
-all: $(LIBFT) $(MLX) $(NAME)
+all: $(LIBFT)  $(GNL) $(MLX) $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
+
+$(GNL):
+	make -C $(GNL_DIR)
 
 $(MLX):
 	make -C $(MINILIBX_DIR)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(GNL) $(MLX_FLAGS) -o $(NAME)
 
 %.o: %.c ./includes/miniRT.h
 	$(CC)  $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	make -C $(LIBFT_DIR) clean
+	make -C $(GNL_DIR) clean
 	make -C $(MINILIBX_DIR) clean
 	rm -f $(OBJ)
 
 fclean: clean
 	make -C $(LIBFT_DIR) fclean
+	make -C $(GNL_DIR) fclean
+	make -C $(MINILIBX_DIR) fclean
 	rm -f $(NAME)
 
 re: fclean all
