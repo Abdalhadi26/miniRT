@@ -21,6 +21,8 @@ SRC = \
 	src/render.c \
 	src/utils.c \
 	src/math_func.c \
+	src/hit_functions.c \
+	src/normal.c
 
 OBJ = $(SRC:.c=.o)
 

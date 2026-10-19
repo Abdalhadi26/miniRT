@@ -143,4 +143,8 @@ t_vector ft_cross(t_vector v1, t_vector v2);
 t_vector ft_scale_vector(t_vector v, double scale);
 t_vector vecotrs_sum(t_vector forward, t_vector right, t_vector up);
 t_vector normalize(t_vector vec);
+
+double closest_hit(t_scene *scene,t_ray camera_ray, int *shape_index);
+t_vector get_normal(t_shapes_list *current_shape, t_ray camera_ray, t_vector hitpoint);
+
 #endif
