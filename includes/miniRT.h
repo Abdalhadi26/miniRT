@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahhammad <ahhammad@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 17:58:57 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/17 15:33:16 by ahhammad         ###   ########.fr       */
+/*   Updated: 2026/10/20 17:15:27 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define HEIGHT 600
 # define ESC 65307
 # define EPS 0.000001
+# define M_PI acos(-1.0)
 
 typedef enum s_shape_type
 {
@@ -145,7 +146,8 @@ void	render(t_scene *scene);
 double	ft_dot(t_vector v1, t_vector v2);
 t_vector ft_cross(t_vector v1, t_vector v2);
 t_vector ft_scale_vector(t_vector v, double scale);
-t_vector vecotrs_sum(t_vector forward, t_vector right, t_vector up);
+t_vector vectors_sum(int n, ...);
+t_vector vectors_sub(int n, ...);
 t_vector normalize(t_vector vec);
 
 double closest_hit(t_scene *scene,t_ray camera_ray, int *shape_index);

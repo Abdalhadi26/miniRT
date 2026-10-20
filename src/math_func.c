@@ -36,13 +36,22 @@ t_vector ft_scale_vector(t_vector v, double scale)
 	return (v);
 }
 
-t_vector vecotrs_sum(t_vector forward, t_vector right, t_vector up)
+t_vector vectors_sum(int n, ...)
 {
+	va_list		vectors;
+	t_vector	v;
 	t_vector	res;
 
-	res.x = forward.x + right.x + up.x;
-	res.y = forward.y + right.y + up.y;
-	res.z = forward.z + right.z + up.z;
+	res = (t_vector){0,0,0};
+	va_start(vectors, n);
+	while (n--)
+	{
+		v = va_arg(vectors, t_vector);
+		res.x += v.x;
+		res.y += v.y;
+		res.z += v.z;
+	}
+	va_end(vectors);
 	return (res);
 }
 
@@ -62,5 +71,24 @@ t_vector normalize(t_vector vec)
 	res.x = vec.x / magnitude;
 	res.y = vec.y / magnitude;
 	res.z = vec.z / magnitude;
+	return (res);
+}
+
+t_vector vectors_sub(int n, ...)
+{
+	va_list		vectors;
+	t_vector	v;
+	t_vector	res;
+
+	res = (t_vector){0,0,0};
+	va_start(vectors, n);
+	while (n--)
+	{
+		v = va_arg(vectors, t_vector);
+		res.x -= v.x;
+		res.y -= v.y;
+		res.z -= v.z;
+	}
+	va_end(vectors);
 	return (res);
 }

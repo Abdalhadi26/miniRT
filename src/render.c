@@ -6,7 +6,7 @@
 /*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 22:14:23 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/05 12:37:03 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/20 17:15:46 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static t_ray	get_camera_ray(t_scene *scene, int px, int py)
 	right = ft_scale_vector(right, u);
 	up = ft_scale_vector(up, v);
 	//final ray
-	camera_ray.direction = normalize(vecotrs_sum(forward, right, up));
+	camera_ray.direction = normalize(vectors_sum(3, forward, right, up));
 	return (camera_ray);
 }
 
