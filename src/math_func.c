@@ -80,8 +80,10 @@ t_vector vectors_sub(int n, ...)
 	t_vector	v;
 	t_vector	res;
 
-	res = (t_vector){0,0,0};
 	va_start(vectors, n);
+	v = va_arg(vectors, t_vector);
+	res = (t_vector){v.x,v.y,v.z};
+	n--;
 	while (n--)
 	{
 		v = va_arg(vectors, t_vector);

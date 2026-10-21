@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_sphere.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aayasrah <aayasrah@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 12:31:11 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/21 12:47:52 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/21 14:27:59 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,4 @@ double get_t_sphere(t_shape *sphere, t_ray camera_ray)
 			return (-1);
 	}
 	return (-1);
-}
-
-#include <stdio.h>
-void main()
-{
-	t_shape *shpere;
-	t_ray camera_ray;
-	double t;
-
-	shpere = calloc(1, sizeof(t_shape));
-	shpere->sphere.center = (t_vector){0, 0, 10};
-	shpere->sphere.diameter = 10;
-	camera_ray.origin = (t_vector){0,0,0};
-	camera_ray.direction = (t_vector){0, 0, 1};
-
-	t = get_t_sphere(shpere, camera_ray);
-	printf("the t is: %f", t);
 }
