@@ -6,16 +6,11 @@
 /*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/18 16:24:01 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/21 14:32:01 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/21 17:33:34 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-double get_t_cylinder(t_shapes_list *cylinder, t_ray camera_ray)
-{
-	
-}
 
 //we want to get the lowest t AND the shape itself
 double closest_hit(t_scene *scene,t_ray camera_ray, int *shape_index)
