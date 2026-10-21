@@ -3,21 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   hit_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aayasrah <aayasrah@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/18 16:24:01 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/21 12:31:47 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/21 14:32:01 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 double get_t_cylinder(t_shapes_list *cylinder, t_ray camera_ray)
-{
-	
-}
-
-double get_t_sphere(t_shapes_list *sphere, t_ray camera_ray)
 {
 	
 }

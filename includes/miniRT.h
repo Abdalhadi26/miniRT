@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aayasrah <aayasrah@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 17:58:57 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/21 12:46:48 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/21 16:49:11 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 # define HEIGHT 600
 # define ESC 65307
 # define EPS 0.000001
-// # ifndef M_PI
-// #  define M_PI acos(-1.0)
-// # endif
+# ifndef M_PI
+#  define M_PI acos(-1.0)
+# endif
 typedef enum s_shape_type
 {
 	SPHERE,
@@ -86,14 +86,14 @@ typedef struct s_sphere
 typedef struct s_plane
 {
 	t_vector		point;
-	t_vector		facing_vector;
+	t_vector		normal;
 	t_color			color;
 }					t_plane;
 
 typedef struct s_cylinder
 {
 	t_vector		center;
-	t_vector		facing_vector;
+	t_vector		axis;
 	double			diameter;
 	double			height;
 	t_color			color;
