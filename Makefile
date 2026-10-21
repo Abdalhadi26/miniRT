@@ -24,7 +24,8 @@ SRC = \
 	src/utils.c \
 	src/math_func.c \
 	src/hit_functions.c \
-	src/normal.c
+	src/normal.c \
+	src/intersection_sphere.c
 
 OBJ = $(SRC:.c=.o)
 

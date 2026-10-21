@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hit_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aayasrah <aayasrah@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/18 16:24:01 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/20 17:19:04 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/21 12:31:47 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-double get_t_sphere(t_shape *sphere, t_ray camera_ray)
-{
-	t_vector	C;
-	t_vector	Q;
-	t_vector	d;
-	double		a;
-	double		b;
-	double		c;
-
-	C = sphere->sphere.center;
-	Q = camera_ray.origin;
-	d = camera_ray.direction;
-	//ax^2 + bx + c
-	a = ft_dot(d,d);
-	b = ft_dot(ft_scale_vector(d, -2), vectors_sub(2, C, Q));
-	c = ft_dot(vectors_sub(2, C, Q), vectors_sub(2, C, Q)) - pow(sphere->sphere.diameter, 2);
-	
-}
 
 double get_t_cylinder(t_shapes_list *cylinder, t_ray camera_ray)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aayasrah <aayasrah@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 17:58:57 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/20 17:15:27 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/21 12:46:48 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <stdarg.h>
 
 # define WIDTH 800
 # define HEIGHT 600
 # define ESC 65307
 # define EPS 0.000001
-# define M_PI acos(-1.0)
-
+// # ifndef M_PI
+// #  define M_PI acos(-1.0)
+// # endif
 typedef enum s_shape_type
 {
 	SPHERE,
@@ -152,5 +154,6 @@ t_vector normalize(t_vector vec);
 
 double closest_hit(t_scene *scene,t_ray camera_ray, int *shape_index);
 t_vector get_normal(t_shapes_list *current_shape, t_ray camera_ray, t_vector hitpoint);
+double get_t_sphere(t_shape *sphere, t_ray camera_ray);
 
 #endif
