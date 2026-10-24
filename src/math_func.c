@@ -104,3 +104,12 @@ t_vector get_hitpoint(t_ray camera_ray,double t)
 	res = vectors_sum(2, camera_ray.origin, scaled_direction);
 	return (res);
 }
+
+double vector_magnitude(t_vector vec)
+{
+	t_vector	res;
+	double		magnitude;
+
+	magnitude = sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
+	return (magnitude);
+}

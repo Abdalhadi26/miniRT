@@ -6,7 +6,7 @@
 /*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 17:33:11 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/24 11:51:24 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/24 13:30:11 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,91 +106,4 @@ double get_t_cylinder(t_shape *cylinder, t_ray camera_ray)
 	if (t_bottom > EPS && (best < 0 || t_bottom < best))
 		best = t_bottom;
 	return (best);
-}
-
-#include "../includes/miniRT.h"
-#include <stdio.h>
-#include <stdlib.h>
-
-static void	run_test(const char *name,
-		t_vector center, t_vector axis,
-		double diameter, double height,
-		t_vector origin, t_vector dir, double expected)
-{
-	t_shape	*cyl;
-	t_ray	ray;
-	double	t;
-
-	cyl = calloc(1, sizeof(t_shape));
-	cyl->cylinder.center   = center;
-	cyl->cylinder.axis     = axis;
-	cyl->cylinder.diameter = diameter;
-	cyl->cylinder.height   = height;
-	ray.origin    = origin;
-	ray.direction = dir;
-
-	t = get_t_cylinder(cyl, ray);
-	printf("%-35s | got = %12.6f | expected = %12.6f\n",
-		name, t, expected);
-	free(cyl);
-}
-
-int	main(void)
-{
-	/* All cylinders centered at (0,0,0) with vertical axis */
-	t_vector	v = (t_vector){0, 1, 0};
-
-	/* T1: tube hit — ray comes at the side, hits tube at x = -1 */
-	run_test("T1  tube hit (side entry)",
-		(t_vector){0, 0, 0}, v, 2.0, 10.0,
-		(t_vector){-5, 0, 0}, (t_vector){1, 0, 0},
-		4.0);
-
-	/* T2: tube miss — ray at y = 10, above the cylinder (h/2 = 5),
-	 * quadratic gives t=4/6 but height check rejects them */
-	run_test("T2  tube hit rejected by height",
-		(t_vector){0, 0, 0}, v, 2.0, 10.0,
-		(t_vector){-5, 10, 0}, (t_vector){1, 0, 0},
-		-1.0);
-
-	/* T3: top cap hit — parallel ray, tube skipped, cap catches at t = 3 */
-	run_test("T3  top cap hit",
-		(t_vector){0, 0, 0}, v, 4.0, 4.0,
-		(t_vector){0, 5, 0}, (t_vector){0, -1, 0},
-		3.0);
-
-	/* T4: both caps in front, nearer one wins (top at t=8, bottom at t=12) */
-	run_test("T4  both caps, nearer wins",
-		(t_vector){0, 0, 0}, v, 4.0, 4.0,
-		(t_vector){0, 10, 0}, (t_vector){0, -1, 0},
-		8.0);
-
-	/* T5: angled tube hit — 45° into the side
-	 * t1 = (14.142 - 2) / 2 = 6.071067 */
-	run_test("T5  angled tube hit",
-		(t_vector){0, 0, 0}, v, 2.0, 10.0,
-		(t_vector){-5, 0, -5}, (t_vector){0.70710678, 0, 0.70710678},
-		6.071067);
-
-	/* T6: caps miss — ray falls straight down but 5 units off-axis, outside r=2 */
-	run_test("T6  cap miss (outside radius)",
-		(t_vector){0, 0, 0}, v, 4.0, 4.0,
-		(t_vector){5, 5, 0}, (t_vector){0, -1, 0},
-		-1.0);
-
-	/* T7: ray behind — origin past the tube, moving away */
-	run_test("T7  ray moving away",
-		(t_vector){0, 0, 0}, v, 2.0, 10.0,
-		(t_vector){5, 0, 0}, (t_vector){1, 0, 0},
-		-1.0);
-
-	/* T8: tube hit from inside — origin at axis, ray out sideways
-	 * OC = center - origin = (0,0,0), OC_perp = (0,0,0)
-	 * c = 0 - 1 = -1, b = 0, a = 1 → disc = 4, t1 = 1, t2 = -1 */
-	run_test("T8  from inside, hits tube from within",
-		(t_vector){0, 0, 0}, v, 2.0, 10.0,
-		(t_vector){0, 0, 0}, (t_vector){1, 0, 0},
-		1.0);
-
-	return (0);
 }
