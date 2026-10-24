@@ -94,3 +94,13 @@ t_vector vectors_sub(int n, ...)
 	va_end(vectors);
 	return (res);
 }
+
+t_vector get_hitpoint(t_ray camera_ray,double t)
+{
+	t_vector	res;
+	t_vector	scaled_direction;
+
+	scaled_direction = ft_scale_vector(camera_ray.direction, t);
+	res = vectors_sum(2, camera_ray.origin, scaled_direction);
+	return (res);
+}

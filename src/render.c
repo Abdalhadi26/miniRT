@@ -6,7 +6,7 @@
 /*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 22:14:23 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/20 17:15:46 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/24 11:53:44 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,6 @@ t_shapes_list *get_current_shaped(t_shapes_list *shapes_list,int shape_index)
 }
 
 int get_color(t_shapes_list *current_shape, t_scene *scene, t_vector normal, t_vector thipoint)
-{
-
-}
-
-t_vector get_hitpoint(t_ray camera_ray,double t)
 {
 
 }

@@ -6,7 +6,7 @@
 /*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 17:58:57 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/21 16:49:11 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/24 11:53:01 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,5 +155,9 @@ t_vector normalize(t_vector vec);
 double closest_hit(t_scene *scene,t_ray camera_ray, int *shape_index);
 t_vector get_normal(t_shapes_list *current_shape, t_ray camera_ray, t_vector hitpoint);
 double get_t_sphere(t_shape *sphere, t_ray camera_ray);
+t_vector get_hitpoint(t_ray camera_ray,double t);
+double get_discriminant(double a,double b,double c);
+double negative_quadratic_formula(double a, double b, double discriminant);
+double positive_quadratic_formula(double a, double b, double discriminant);
 
 #endif
