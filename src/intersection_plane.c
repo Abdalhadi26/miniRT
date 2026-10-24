@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_plane.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aayasrah <aayasrah@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 14:31:39 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/21 17:31:06 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/22 20:57:26 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
