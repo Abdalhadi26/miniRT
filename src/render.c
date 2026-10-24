@@ -6,7 +6,7 @@
 /*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 22:14:23 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/24 11:53:44 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/24 19:20:52 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,12 @@ static t_ray	get_camera_ray(t_scene *scene, int px, int py)
 
 t_shapes_list *get_current_shaped(t_shapes_list *shapes_list,int shape_index)
 {
-	while (shape_index >= 0)
+	while (shape_index > 0)
+	{
 		shapes_list = shapes_list->next;
+		shape_index--;
+	}
 	return (shapes_list);
-}
-
-int get_color(t_shapes_list *current_shape, t_scene *scene, t_vector normal, t_vector thipoint)
-{
-
 }
 
 void	render(t_scene *scene)
