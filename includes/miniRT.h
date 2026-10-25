@@ -110,7 +110,7 @@ typedef struct s_shapes_list
 {
 	t_shape_type			type;
 	t_shape					shape;
-	struct t_shapes_list	*next;
+	struct s_shapes_list	*next;
 }					t_shapes_list;
 
 typedef struct s_img
@@ -156,6 +156,9 @@ double vector_magnitude(t_vector vec);
 double closest_hit(t_scene *scene,t_ray camera_ray, int *shape_index);
 t_vector get_normal(t_shapes_list *current_shape, t_ray camera_ray, t_vector hitpoint);
 double get_t_sphere(t_shape *sphere, t_ray camera_ray);
+double get_t_plane(t_shape *plane, t_ray camera_ray);
+double get_t_cylinder(t_shape *cylinder, t_ray camera_ray);
+int	get_color(t_shapes_list *current_shape, t_scene *scene, t_vector normal, t_vector hitpoint);
 t_vector get_hitpoint(t_ray camera_ray,double t);
 double get_discriminant(double a,double b,double c);
 double negative_quadratic_formula(double a, double b, double discriminant);

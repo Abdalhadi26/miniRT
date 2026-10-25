@@ -1,7 +1,7 @@
 NAME = miniRT
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O3
 
 LIBFT_DIR = ./libft
 GNL_DIR = ./gnl
@@ -16,7 +16,6 @@ INCLUDES = -I includes -I $(LIBFT_DIR) -I $(MINILIBX_DIR)
 
 SRC = \
 	src/main.c \
-	src/parsing/check_args.c \
 	src/cleanup.c \
 	src/hook_init.c \
 	src/mlx_init.c \
@@ -25,7 +24,10 @@ SRC = \
 	src/math_func.c \
 	src/hit_functions.c \
 	src/normal.c \
-	src/intersection_sphere.c
+	src/intersection_sphere.c \
+	src/intersection_cylinder.c \
+	src/intersection_plane.c \
+	src/color.c
 
 OBJ = $(SRC:.c=.o)
 
