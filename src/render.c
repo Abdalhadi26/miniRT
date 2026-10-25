@@ -6,7 +6,7 @@
 /*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 22:14:23 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/24 19:20:52 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/25 18:14:08 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,34 @@ static t_ray	get_camera_ray(t_scene *scene, int px, int py)
 	camera_ray.origin.x = scene->camera.viewpoint.x;
 	camera_ray.origin.y = scene->camera.viewpoint.y;
 	camera_ray.origin.z = scene->camera.viewpoint.z;
+
 	//u and v
 	half_width = tan((scene->camera.fov * M_PI / 180) / 2);
 	aspect_ratio = (double)WIDTH / (double)HEIGHT;
 	double u = ((((px + 0.5) / WIDTH) * 2) - 1) * half_width;
 	double v = (1 - (((py + 0.5) / HEIGHT) * 2)) * half_width / aspect_ratio;
-	//the real directions, forward right and up
+
+	//the helper vector: sky, or (0,0,1) when forward is parallel to sky
 	t_vector sky;
 	sky.x = 0;
 	sky.y = 1;
 	sky.z = 0;
 	t_vector forward = scene->camera.orientation;
-	t_vector right = normalize(ft_cross(forward, sky));
+	t_vector right_raw = ft_cross(forward, sky);
+	if (vector_magnitude(right_raw) < EPS)
+	{
+		sky.x = 0;
+		sky.y = 0;
+		sky.z = 1;
+		right_raw = ft_cross(forward, sky);
+	}
+
+	//the real directions, forward right and up
+	t_vector right = normalize(right_raw);
 	t_vector up = normalize(ft_cross(right, forward));
 	right = ft_scale_vector(right, u);
 	up = ft_scale_vector(up, v);
+
 	//final ray
 	camera_ray.direction = normalize(vectors_sum(3, forward, right, up));
 	return (camera_ray);
