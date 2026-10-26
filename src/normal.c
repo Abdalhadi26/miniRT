@@ -6,7 +6,7 @@
 /*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/18 18:46:05 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/24 14:04:18 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/26 13:55:58 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_vector get_normal(t_shapes_list *current_shape, t_ray camera_ray, t_vector hit
 		normal = get_normal_sphere(current_shape->shape, hitpoint);
 	else if(current_shape->type == CYLINDER)
 		normal = get_normal_cylinder(current_shape->shape, hitpoint);
-	else if(current_shape->type == PLANE)
+	else
 		normal = current_shape->shape.plane.normal;
 	if (ft_dot(normal, d) > 0)
 		normal = ft_scale_vector(normal, -1);
