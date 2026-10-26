@@ -28,7 +28,7 @@ int		ft_strlen_gnl(char *s);
 char	*ft_strjoin_gnl(char *s1, char *s2);
 void	ft_strlcpy_gnl(char *dest, const char *src);
 void	ft_strlcat_gnl(char *dst, char *src);
-int		get_next_line(int fd, char *line);
+char	*get_next_line(int fd);
 char	*cpye_to_nl(char *p);
 bool	has_nl(char *p);
 int		len_etb(char *p);

@@ -68,7 +68,7 @@ int	get_color(t_shapes_list *current_shape, t_scene *scene, t_vector normal, t_v
 	light_ray.direction = L;
 
 	t = closest_hit(scene, light_ray, &useless);
-	if (t < light_len)
+	if (t > EPS && t < light_len)
 		return (pack_color(ambient_r, ambient_g, ambient_b));
 
 	return (pack_color(

@@ -16,6 +16,7 @@ INCLUDES = -I includes -I $(LIBFT_DIR) -I $(MINILIBX_DIR)
 
 SRC = \
 	src/main.c \
+	src/ft_atod.c \
 	src/cleanup.c \
 	src/hook_init.c \
 	src/mlx_init.c \
@@ -27,7 +28,13 @@ SRC = \
 	src/intersection_sphere.c \
 	src/intersection_cylinder.c \
 	src/intersection_plane.c \
-	src/color.c
+	src/color.c \
+	src/parsing/check_args.c \
+	src/parsing/read_file.c \
+	src/parsing/parse_utils.c \
+	src/parsing/parse_types.c \
+	src/parsing/parse_elements.c \
+	src/parsing/parse_shapes.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -57,7 +64,6 @@ clean:
 fclean: clean
 	make -C $(LIBFT_DIR) fclean
 	make -C $(GNL_DIR) fclean
-	make -C $(MINILIBX_DIR) fclean
 	rm -f $(NAME)
 
 re: fclean all

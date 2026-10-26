@@ -6,29 +6,27 @@
 /*   By: ahhammad <ahhammad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 15:32:12 by ahhammad          #+#    #+#             */
-/*   Updated: 2026/10/17 15:55:40 by ahhammad         ###   ########.fr       */
+/*   Updated: 2026/10/26 12:44:00 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int check_args(int ac, char *av[])
+int	check_args(int ac, char *av[])
 {
-    if (ac != 2)
-    {
-        ft_putstr_fd("Usage: ./miniRT <scene.rt>\n", 1);
-        return (0);
-    }
-    // if (ft_strlen(av[1]) < 4)
-    // {
-    //     ft_putstr_fd("Error: Invalid file name. Expected a file with '.rt' extension\n", 1);
-    //     return (0);
-    // }
-    printf("%s", av[1] + ft_strlen(av[1]) - 3);
-    if (ft_strncmp(av[1] + ft_strlen(av[1]) - 3, ".rt", 3))
-    {
-        ft_putstr_fd("Error: Invalid file extension. Expected '.rt'\n", 1);
-        return (0);
-    }
-    return (1);
+	int	len;
+
+	if (ac != 2)
+	{
+		ft_putstr_fd("Error\nUsage: ./miniRT <scene.rt>\n", 2);
+		return (0);
+	}
+	len = ft_strlen(av[1]);
+	if (len < 4 || ft_strncmp(av[1] + len - 3, ".rt", 3) != 0
+		|| av[1][len - 4] == '/')
+	{
+		ft_putstr_fd("Error\nInvalid file extension, expected '.rt'\n", 2);
+		return (0);
+	}
+	return (1);
 }

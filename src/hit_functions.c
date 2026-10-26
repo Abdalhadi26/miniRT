@@ -32,7 +32,7 @@ double closest_hit(t_scene *scene,t_ray camera_ray, int *shape_index)
 			temp = get_t_cylinder(&Lshapes->shape, camera_ray);
 		else if(Lshapes->type == PLANE)
 			temp = get_t_plane(&Lshapes->shape, camera_ray);
-		if (temp < t)
+		if (temp > EPS && temp < t)
 		{
 			t = temp;
 			*shape_index = i;

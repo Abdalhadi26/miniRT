@@ -26,6 +26,9 @@
 # define HEIGHT 600
 # define ESC 65307
 # define EPS 0.000001
+# define FLAG_A 1
+# define FLAG_C 2
+# define FLAG_L 4
 # ifndef M_PI
 #  define M_PI acos(-1.0)
 # endif
@@ -139,6 +142,24 @@ int	init_img(t_scene *scene);
 void	init_hook(t_scene *scene);
 
 int		check_args(int ac, char *av[]);
+int		read_file(t_scene *scene, char *file_name);
+int		ft_atod(const char *s, double *out);
+void	free_split(char **arr);
+int		split_len(char **arr);
+int		count_char(const char *s, char c);
+void	replace_whitespace(char *str);
+void	free_shapes_list(t_shapes_list *list);
+int		is_all_digits(char *str);
+int		parse_color(char *str, t_color *color);
+int		parse_vector(char *str, t_vector *vec);
+int		parse_norm_vector(char *str, t_vector *vec);
+int		parse_ambient(t_scene *scene, char **tokens, int *flags);
+int		parse_camera(t_scene *scene, char **tokens, int *flags);
+int		parse_light(t_scene *scene, char **tokens, int *flags);
+int		add_shape_node(t_shapes_list **list, t_shape_type type, t_shape shape);
+int		parse_sphere(t_scene *scene, char **tokens);
+int		parse_plane(t_scene *scene, char **tokens);
+int		parse_cylinder(t_scene *scene, char **tokens);
 void	cleanup(t_scene *scene);
 void	cleanup_and_exit(t_scene *scene, int code);
 
