@@ -6,7 +6,7 @@
 /*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 20:53:42 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/05 12:39:30 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/26 14:38:56 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int	init_mlx(t_scene *scene)
 	scene->mlx = mlx_init();
 	if (!scene->mlx)
 		return (0);
-	scene->win = mlx_new_window(scene->mlx, WIDTH, HEIGHT,
-			"miniRT");
+	scene->win = mlx_new_window(scene->mlx, WIDTH, HEIGHT, "miniRT");
 	if (!scene->win)
 	{
 		cleanup(scene);

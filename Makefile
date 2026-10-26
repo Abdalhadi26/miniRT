@@ -21,8 +21,9 @@ SRC = \
 	src/hook_init.c \
 	src/mlx_init.c \
 	src/render.c \
-	src/utils.c \
+	src/camera_ray.c \
 	src/math_func.c \
+	src/math_func2.c \
 	src/hit_functions.c \
 	src/normal.c \
 	src/intersection_sphere.c \

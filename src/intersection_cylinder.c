@@ -6,7 +6,7 @@
 /*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 17:33:11 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/24 13:30:11 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/26 17:41:14 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 
 // height = OC·A + t * (D·A)
 // Valid only if |height| <= h/2 (and t > EPS)
-int check_height_validity(double t,t_vector OC, t_vector A, t_vector d, double h)
+int	check_height_validity(double t, t_vector OC, t_vector A, t_vector d,
+		double h)
 {
-	double height;
+	double	height;
 
 	height = t * ft_dot(d, A) - ft_dot(OC, A);
-	if (fabs(height) <= h/2)
+	if (fabs(height) <= h / 2)
 		return (1);
 	return (0);
 }
 
-double get_t_disc(t_vector center, t_vector normal, double radius, t_ray camera_ray)
+double	get_t_disc(t_vector center, t_vector normal, double radius,
+		t_ray camera_ray)
 {
 	t_vector	hit_point;
 	t_vector	to_center;
@@ -46,7 +48,7 @@ double get_t_disc(t_vector center, t_vector normal, double radius, t_ray camera_
 	return (t);
 }
 
-double get_t_cylinder(t_shape *cylinder, t_ray camera_ray)
+double	get_t_cylinder(t_shape *cylinder, t_ray camera_ray)
 {
 	t_vector	OC;
 	t_vector	d;
@@ -75,12 +77,10 @@ double get_t_cylinder(t_shape *cylinder, t_ray camera_ray)
 	d = camera_ray.direction;
 	OC_perp = vectors_sub(2, OC, ft_scale_vector(A, ft_dot(OC, A)));
 	d_perp = vectors_sub(2, d, ft_scale_vector(A, ft_dot(d, A)));
-
-	//ax^2 + bx + c
+	// ax^2 + bx + c
 	a = ft_dot(d_perp, d_perp);
 	b = ft_dot(ft_scale_vector(d_perp, -2), OC_perp);
 	c = ft_dot(OC_perp, OC_perp) - radius * radius;
-
 	t_tube = -1;
 	discriminant = get_discriminant(a, b, c);
 	if (discriminant >= 0)
@@ -92,12 +92,12 @@ double get_t_cylinder(t_shape *cylinder, t_ray camera_ray)
 		else if (t2 > EPS && check_height_validity(t2, OC, A, d, h))
 			t_tube = t2;
 	}
-
-	top_center = vectors_sub(2, cylinder->cylinder.center, ft_scale_vector(A, -h / 2));
-	bottom_center = vectors_sub(2, cylinder->cylinder.center, ft_scale_vector(A, h / 2));
+	top_center = vectors_sub(2, cylinder->cylinder.center, ft_scale_vector(A, -h
+				/ 2));
+	bottom_center = vectors_sub(2, cylinder->cylinder.center, ft_scale_vector(A,
+				h / 2));
 	t_top = get_t_disc(top_center, A, radius, camera_ray);
 	t_bottom = get_t_disc(bottom_center, A, radius, camera_ray);
-
 	best = -1;
 	if (t_tube > EPS)
 		best = t_tube;
