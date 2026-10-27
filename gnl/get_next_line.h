@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahhammad <ahhammad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 17:19:11 by ahhammad          #+#    #+#             */
-/*   Updated: 2025/09/24 17:19:12 by ahhammad         ###   ########.fr       */
+/*   Updated: 2026/10/27 14:04:22 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,6 @@ char	*get_next_line(int fd);
 char	*cpye_to_nl(char *p);
 bool	has_nl(char *p);
 int		len_etb(char *p);
+void	new_str(char *p);
+
 #endif

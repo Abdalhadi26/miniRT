@@ -28,6 +28,7 @@ SRC = \
 	src/normal.c \
 	src/intersection_sphere.c \
 	src/intersection_cylinder.c \
+	src/intersection_cylinder_utilc.c \
 	src/intersection_plane.c \
 	src/color.c \
 	src/parsing/check_args.c \

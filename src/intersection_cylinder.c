@@ -6,24 +6,11 @@
 /*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 17:33:11 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/26 17:41:14 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/27 15:34:13 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/miniRT.h"
-
-// height = OC·A + t * (D·A)
-// Valid only if |height| <= h/2 (and t > EPS)
-int	check_height_validity(double t, t_vector OC, t_vector A, t_vector d,
-		double h)
-{
-	double	height;
-
-	height = t * ft_dot(d, A) - ft_dot(OC, A);
-	if (fabs(height) <= h / 2)
-		return (1);
-	return (0);
-}
 
 double	get_t_disc(t_vector center, t_vector normal, double radius,
 		t_ray camera_ray)
@@ -48,56 +35,35 @@ double	get_t_disc(t_vector center, t_vector normal, double radius,
 	return (t);
 }
 
-double	get_t_cylinder(t_shape *cylinder, t_ray camera_ray)
+double	get_t_tube(t_shape *cyl, t_ray camera_ray, t_vector A, double radius)
 {
-	t_vector	OC;
+	t_vector	oc;
 	t_vector	d;
-	t_vector	OC_perp;
-	t_vector	d_perp;
-	t_vector	A;
-	t_vector	top_center;
-	t_vector	bottom_center;
-	double		a;
-	double		b;
-	double		c;
-	double		discriminant;
-	double		t1;
-	double		t2;
-	double		h;
-	double		radius;
-	double		t_tube;
-	double		t_top;
-	double		t_bottom;
-	double		best;
+	double		quad_fac[3];
+	double		t[2];
+	double		disc;
 
-	A = cylinder->cylinder.axis;
-	h = cylinder->cylinder.height;
-	radius = cylinder->cylinder.diameter / 2;
-	OC = vectors_sub(2, cylinder->cylinder.center, camera_ray.origin);
+	oc = vectors_sub(2, cyl->cylinder.center, camera_ray.origin);
 	d = camera_ray.direction;
-	OC_perp = vectors_sub(2, OC, ft_scale_vector(A, ft_dot(OC, A)));
-	d_perp = vectors_sub(2, d, ft_scale_vector(A, ft_dot(d, A)));
-	// ax^2 + bx + c
-	a = ft_dot(d_perp, d_perp);
-	b = ft_dot(ft_scale_vector(d_perp, -2), OC_perp);
-	c = ft_dot(OC_perp, OC_perp) - radius * radius;
-	t_tube = -1;
-	discriminant = get_discriminant(a, b, c);
-	if (discriminant >= 0)
+	cooffe(quad_fac, oc, d, A);
+	quad_fac[2] -= radius * radius;
+	disc = get_discriminant(quad_fac[0], quad_fac[1], quad_fac[2]);
+	if (disc >= 0)
 	{
-		t1 = negative_quadratic_formula(a, b, discriminant);
-		t2 = positive_quadratic_formula(a, b, discriminant);
-		if (t1 > EPS && check_height_validity(t1, OC, A, d, h))
-			t_tube = t1;
-		else if (t2 > EPS && check_height_validity(t2, OC, A, d, h))
-			t_tube = t2;
+		t[1] = positive_quadratic_formula(quad_fac[0], quad_fac[1], disc);
+		t[0] = negative_quadratic_formula(quad_fac[0], quad_fac[1], disc);
+		if (t[0] > EPS && check_height_validity(cyl, t[0], oc, d))
+			return (t[0]);
+		else if (t[1] > EPS && check_height_validity(cyl, t[1], oc, d))
+			return (t[1]);
 	}
-	top_center = vectors_sub(2, cylinder->cylinder.center, ft_scale_vector(A, -h
-				/ 2));
-	bottom_center = vectors_sub(2, cylinder->cylinder.center, ft_scale_vector(A,
-				h / 2));
-	t_top = get_t_disc(top_center, A, radius, camera_ray);
-	t_bottom = get_t_disc(bottom_center, A, radius, camera_ray);
+	return (-1);
+}
+
+double	chose_best_t(double t_tube, double t_top, double t_bottom)
+{
+	double	best;
+
 	best = -1;
 	if (t_tube > EPS)
 		best = t_tube;
@@ -106,4 +72,24 @@ double	get_t_cylinder(t_shape *cylinder, t_ray camera_ray)
 	if (t_bottom > EPS && (best < 0 || t_bottom < best))
 		best = t_bottom;
 	return (best);
+}
+
+double	get_t_cylinder(t_shape *cyl, t_ray camera_ray)
+{
+	t_vector	a_vec;
+	t_vector	top_center;
+	t_vector	bottom_center;
+	double		radius;
+	double		t_val[3];
+
+	a_vec = cyl->cylinder.axis;
+	radius = cyl->cylinder.diameter / 2;
+	t_val[0] = get_t_tube(cyl, camera_ray, a_vec, radius);
+	top_center = vectors_sub(2, cyl->cylinder.center, ft_scale_vector(a_vec,
+				-cyl->cylinder.height / 2));
+	bottom_center = vectors_sub(2, cyl->cylinder.center, ft_scale_vector(a_vec,
+				cyl->cylinder.height / 2));
+	t_val[1] = get_t_disc(top_center, a_vec, radius, camera_ray);
+	t_val[2] = get_t_disc(bottom_center, a_vec, radius, camera_ray);
+	return (chose_best_t(t_val[0], t_val[1], t_val[2]));
 }
