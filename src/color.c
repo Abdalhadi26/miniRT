@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aayasrah <aayasrah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aayasrah <aayasrah@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 15:26:17 by aayasrah          #+#    #+#             */
-/*   Updated: 2026/10/26 14:30:43 by aayasrah         ###   ########.fr       */
+/*   Updated: 2026/10/26 20:16:00 by aayasrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/miniRT.h"
+#include "miniRT.h"
 
 t_color	get_shape_color(t_shapes_list *shape)
 {
@@ -33,39 +33,50 @@ static int	pack_color(double r, double g, double b)
 	return (((int)r << 16) | ((int)g << 8) | (int)b);
 }
 
+static void	get_ambient(t_color obj, t_ambient_light amp, double amb[3])
+{
+	double	ratio;
+
+	ratio = amp.intensity / 255.0;
+	amb[0] = obj.r * (amp.color.r * ratio);
+	amb[1] = obj.g * (amp.color.g * ratio);
+	amb[2] = obj.b * (amp.color.b * ratio);
+}
+
+static int	is_shadowed(t_scene *scene, t_vector hit, t_vector norm,
+		double *cos_val)
+{
+	t_vector	to_light;
+	t_ray		ray;
+	double		light_dist;
+	double		t;
+	int			dummy;
+
+	to_light = vectors_sub(2, scene->light.light_point, hit);
+	light_dist = vector_magnitude(to_light);
+	ray.direction = ft_scale_vector(to_light, 1.0 / light_dist);
+	*cos_val = ft_dot(norm, ray.direction);
+	if (*cos_val <= 0)
+		return (1);
+	ray.origin = vectors_sum(2, hit, ft_scale_vector(norm, EPS));
+	t = closest_hit(scene, ray, &dummy);
+	return (t > EPS && t < light_dist);
+}
+
 int	get_color(t_shapes_list *current_shape, t_scene *scene, t_vector normal,
 		t_vector hitpoint)
 {
-	t_color			obj;
-	t_ambient_light	amp;
-	double			ambient_r;
-	double			ambient_g;
-	double			ambient_b;
-	t_vector		hitpoint_to_light;
-	t_vector		L;
-	double			light_len;
-	double			cos;
-	t_ray			light_ray;
-	double			t;
-	int				useless;
+	t_color	obj;
+	double	amb[3];
+	double	cos_val;
+	double	factor;
 
 	obj = get_shape_color(current_shape);
-	amp = scene->ambient_light;
-	ambient_r = obj.r * amp.intensity * (amp.color.r / 255.0);
-	ambient_g = obj.g * amp.intensity * (amp.color.g / 255.0);
-	ambient_b = obj.b * amp.intensity * (amp.color.b / 255.0);
-	hitpoint_to_light = vectors_sub(2, scene->light.light_point, hitpoint);
-	light_len = vector_magnitude(hitpoint_to_light);
-	L = ft_scale_vector(hitpoint_to_light, 1.0 / light_len);
-	cos = ft_dot(normal, L);
-	if (cos <= 0)
-		return (pack_color(ambient_r, ambient_g, ambient_b));
-	light_ray.origin = vectors_sum(2, hitpoint, ft_scale_vector(normal, EPS));
-	light_ray.direction = L;
-	t = closest_hit(scene, light_ray, &useless);
-	if (t > EPS && t < light_len)
-		return (pack_color(ambient_r, ambient_g, ambient_b));
-	return (pack_color(ambient_r + obj.r * scene->light.brightness * cos,
-			ambient_g + obj.g * scene->light.brightness * cos,
-			ambient_b + obj.b * scene->light.brightness * cos));
+	get_ambient(obj, scene->ambient_light, amb);
+	if (is_shadowed(scene, hitpoint, normal, &cos_val))
+		return (pack_color(amb[0], amb[1], amb[2]));
+	factor = scene->light.brightness * cos_val;
+	return (pack_color(amb[0] + obj.r * factor,
+			amb[1] + obj.g * factor,
+			amb[2] + obj.b * factor));
 }

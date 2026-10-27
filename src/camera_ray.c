@@ -12,15 +12,15 @@
 
 #include "miniRT.h"
 
-static void	get_u_v(t_scene *scene, double *u, double *v, int px, int py)
+static void	get_u_v(t_scene *scene, double uv[2], int px, int py)
 {
 	double	half_width;
 	double	aspect_ratio;
 
 	half_width = tan((scene->camera.fov * M_PI / 180) / 2);
 	aspect_ratio = (double)WIDTH / (double)HEIGHT;
-	*u = ((((px + 0.5) / WIDTH) * 2) - 1) * half_width;
-	*v = (1 - (((py + 0.5) / HEIGHT) * 2)) * half_width / aspect_ratio;
+	uv[0] = ((((px + 0.5) / WIDTH) * 2) - 1) * half_width;
+	uv[1] = (1 - (((py + 0.5) / HEIGHT) * 2)) * half_width / aspect_ratio;
 }
 
 static t_vector	get_direction(t_scene *scene, double u, double v)
@@ -53,15 +53,14 @@ static t_vector	get_direction(t_scene *scene, double u, double v)
 t_ray	get_camera_ray(t_scene *scene, int px, int py)
 {
 	t_ray	camera_ray;
-	double	u;
-	double	v;
+	double	uv[2];
 
-	u = 0;
-	v = 0;
+	uv[0] = 0;
+	uv[1] = 0;
 	camera_ray.origin.x = scene->camera.viewpoint.x;
 	camera_ray.origin.y = scene->camera.viewpoint.y;
 	camera_ray.origin.z = scene->camera.viewpoint.z;
-	get_u_v(scene, &u, &v, px, py);
-	camera_ray.direction = get_direction(scene, u, v);
+	get_u_v(scene, uv, px, py);
+	camera_ray.direction = get_direction(scene, uv[0], uv[1]);
 	return (camera_ray);
 }
